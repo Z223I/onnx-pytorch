@@ -251,18 +251,13 @@ def test_run_model(inputs=[{', '.join(numpy_input_str)}]):''',
           print(f"n.op_type: {n.op_type}")
           if hasattr(op_code_gen,
                      "gen_method") and n.op_type not in self.method_parts:
-            print("Point 1")
             self.method_parts[n.op_type] = op_code_gen.gen_method()
-            print("Point 2")
-          print("Point 2A")
           """
           gened = op_code_gen.gen(n, value_infos, initializers, self.rename_helper,
                               self.tensor_inplace)
           """
           gened = op_code_gen.gen(n, value_infos, initializers)
-          print("Point 3")
           self.add_init_part(gened["init"])
-          print("Point 4")
           self.add_forward_part(gened["forward"])
         except BaseException as e:
           print(f"e: {e}")
